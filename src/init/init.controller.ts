@@ -11,6 +11,7 @@ export class InitController {
 
   @Post('/races')
   async races(): Promise<Race[]> {
+    console.log('1');
     return await this.initService.initRaces();
   }
 
