@@ -21,6 +21,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Checkout docks repo
+      uses: actions/checkout@v3
+      with:
+        repository: greenvalera/dnd5srd
+        path: dnd5srd
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
