@@ -12,6 +12,7 @@ import {DatabaseModule} from "./database/database.module";
 import { RacesModule } from './races/races.module';
 import { InitModule } from './init/init.module';
 import { ClassesModule } from './classes/classes.module';
+import { SpellsModule } from './spells/spells.module';
 
 @Module({
   controllers: [AppController],
@@ -33,6 +34,7 @@ import { ClassesModule } from './classes/classes.module';
       RacesModule,
       InitModule,
       ClassesModule,
+      SpellsModule,
   ],
 })
 export class AppModule {}

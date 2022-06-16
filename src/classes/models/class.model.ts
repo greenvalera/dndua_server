@@ -1,7 +1,9 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import {Column, DataType, Table, Model, ForeignKey, BelongsTo} from "sequelize-typescript";
+import {Column, DataType, Table, Model, ForeignKey, BelongsTo, BelongsToMany} from "sequelize-typescript";
 import { CreateClassAttrs } from '../interfaces';
 import {Page} from "../../pages/models/page.model";
+import {SpellsClasses} from "../../spells/models/spells-classes.model";
+import {Spell} from "../../spells/models/spell.model";
 
 
 @ObjectType({description: 'class'})
@@ -18,4 +20,8 @@ export class Class extends Model<Class, CreateClassAttrs> {
   @Field(() => Page)
   @BelongsTo(() => Page)
   page: Page
+
+  @Field(() => [Spell])
+  @BelongsToMany(() => Spell, () => SpellsClasses)
+  spells: Spell[]
 }

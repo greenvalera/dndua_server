@@ -1,7 +1,6 @@
 import {Inject, Injectable} from '@nestjs/common';
-import {Race} from "../races/models/race.model";
-import {CreateRaceAttrs} from "../races/interfaces";
 import {Class} from "./models/class.model";
+import {CreateClassAttrs} from "./interfaces";
 
 @Injectable()
 export class ClassesService {
@@ -10,15 +9,15 @@ export class ClassesService {
     private classesRepository: typeof Class
   ) {}
 
-  async findAll(): Promise<Race[]> {
+  async findAll(): Promise<Class[]> {
     return await this.classesRepository.findAll({include: 'page'});
   }
 
-  async findById(id: string): Promise<Race> {
+  async findById(id: string): Promise<Class> {
     return await this.classesRepository.findByPk(id, {include: 'page'});
   }
 
-  async create(dto: CreateRaceAttrs): Promise<Race> {
+  async create(dto: CreateClassAttrs): Promise<Class> {
     return await this.classesRepository.create(dto);
   }
 }
