@@ -58,7 +58,7 @@ export class SpellAttributes extends Model<SpellAttributes, CreateSpellAttribute
 
   @Field(() => Boolean)
   @Column({type: DataType.BOOLEAN, defaultValue: false})
-  componentVisual: boolean
+  componentVerbal: boolean
 
   @Field(() => Boolean)
   @Column({type: DataType.BOOLEAN, defaultValue: false})

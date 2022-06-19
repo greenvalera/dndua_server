@@ -68,6 +68,7 @@ export enum SpellDuration {
 export enum AttackType {
   RANGE = 'RANGE',
   MELEE = 'MELEE',
+  SELF = 'SELF',
 }
 
 // export enum AttackType {

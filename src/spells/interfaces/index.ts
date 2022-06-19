@@ -20,7 +20,7 @@ class CreateSpellDto {
   @Field(() => CastingTime)
   castingTime: CastingTime;
   @Field(() => Boolean)
-  componentVisual: boolean;
+  componentVerbal: boolean;
   @Field(() => Boolean)
   componentSomatic: boolean;
   @Field(() => Boolean)
@@ -47,7 +47,7 @@ interface CreateSpellAttributesAttrs {
   concentration: boolean,
   ritual: boolean,
   castingTime: CastingTime,
-  componentVisual: boolean,
+  componentVerbal: boolean,
   componentSomatic: boolean,
   componentMaterial: boolean,
   attackType: AttackType,
