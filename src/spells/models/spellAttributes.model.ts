@@ -77,6 +77,6 @@ export class SpellAttributes extends Model<SpellAttributes, CreateSpellAttribute
   duration: SpellDuration
 
   @Field(() => Abilities)
-  @Column({type: DataType.ENUM(...Object.keys(Abilities)), defaultValue: null})
+  @Column({type: DataType.ENUM(...Object.keys(Abilities)), defaultValue: Abilities.NONE})
   saveRequired: Abilities
 }

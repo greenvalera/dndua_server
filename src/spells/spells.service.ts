@@ -16,15 +16,6 @@ export class SpellsService {
     private spellAttributesRepository: typeof SpellAttributes
   ) {}
 
-  async create(dto: CreateSpellDto): Promise<Spell> {
-    const attributesId = randomUUID();
-    const attributes = await this.createSpellAttributes({...dto, id: attributesId});
-    const spellId = getSpellIdFromName(dto.enName);
-    const spell = await this.spellsRepository.create({...dto, id: spellId, attributesId: attributes.id});
-    await spell.$set('classes', dto.classes);
-    return spell;
-  }
-
   async findAll(): Promise<Spell[]> {
     return await this.spellsRepository.findAll({include: ['attributes', 'classes']});
   }
@@ -43,6 +34,15 @@ export class SpellsService {
 
   async findByParams(params: SpellSearchParams): Promise<Spell[]> {
     return [];
+  }
+
+  async create(dto: CreateSpellDto): Promise<Spell> {
+    const attributesId = randomUUID();
+    const attributes = await this.createSpellAttributes({...dto, id: attributesId});
+    const spellId = getSpellIdFromName(dto.enName);
+    const spell = await this.spellsRepository.create({...dto, id: spellId, attributesId: attributes.id});
+    await spell.$set('classes', dto.classes);
+    return await this.spellsRepository.findByPk(spellId, {include: ['attributes', 'classes']});
   }
 
   private async createSpellAttributes(dto: CreateSpellAttributesAttrs): Promise<SpellAttributes> {

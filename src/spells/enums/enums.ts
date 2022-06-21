@@ -77,9 +77,10 @@ export enum AttackType {
 // }
 
 export enum Abilities {
+  NONE =  "NONE",
   STRENGTH = "STRENGTH",
   DEXTERITY = "DEXTERITY",
-  CONSTITUTION = "CoCONSTITUTIONnstitution",
+  CONSTITUTION = "CONSTITUTION",
   INTELLIGENCE = "INTELLIGENCE",
   WISDOM = "WISDOM",
   CHARISMA = "CHARISMA",
