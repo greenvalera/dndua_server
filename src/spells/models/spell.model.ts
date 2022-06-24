@@ -21,7 +21,7 @@ export class Spell extends Model<Spell, CreateSpellAttrs> {
   enName: string
 
   @Field(() => String)
-  @Column({type: DataType.STRING, allowNull: false})
+  @Column({type: DataType.TEXT, allowNull: false})
   description: string
 
   @Column({type: DataType.STRING})
