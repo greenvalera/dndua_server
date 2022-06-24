@@ -29,4 +29,12 @@ export class SpellsResolver {
   async createSpell(@Args('params', {type: () => CreateSpellDto}) params: CreateSpellDto) {
     return await this.spellsService.create(params);
   }
+
+  @Mutation(() => Spell)
+  async updateSpell(
+    @Args('id', {type: () => String}) id: string,
+    @Args('params', {type: () => CreateSpellDto}) params: CreateSpellDto
+  ) {
+    return await this.spellsService.update(id, params);
+  }
 }
