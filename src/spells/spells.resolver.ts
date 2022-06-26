@@ -31,6 +31,11 @@ export class SpellsResolver {
   }
 
   @Mutation(() => Spell)
+  async deleteSpell(@Args('id', {type: () => String}) id: string) {
+    return await this.spellsService.delete(id);
+  }
+
+  @Mutation(() => Spell)
   async updateSpell(
     @Args('id', {type: () => String}) id: string,
     @Args('params', {type: () => CreateSpellDto}) params: CreateSpellDto

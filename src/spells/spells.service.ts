@@ -67,6 +67,14 @@ export class SpellsService {
     }
   }
 
+  async delete(id: string): Promise<Spell> {
+    const spell = await this.spellsRepository.findByPk(id, {include: ['attributes', 'classes']});
+    await spell.destroy();
+    await spell.attributes.destroy();
+    await spell.$remove('classes', spell.classes.map(model => model.id));
+    return spell;
+  }
+
   private async createSpellAttributes(dto: CreateSpellAttributesAttrs): Promise<SpellAttributes> {
     return await this.spellAttributesRepository.create(dto);
   }
