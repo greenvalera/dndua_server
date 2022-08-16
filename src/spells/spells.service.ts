@@ -34,7 +34,6 @@ export class SpellsService {
   }
 
   async findByParams(params: SpellSearchParams): Promise<Spell[]> {
-    //Test
     return [];
   }
 
