@@ -13,6 +13,8 @@ import { RacesModule } from './races/races.module';
 import { InitModule } from './init/init.module';
 import { ClassesModule } from './classes/classes.module';
 import { SpellsModule } from './spells/spells.module';
+import { SrdModule } from './srd/srd.module';
+import { SourcesModule } from './sources/sources.module';
 
 @Module({
   controllers: [AppController],
@@ -35,6 +37,8 @@ import { SpellsModule } from './spells/spells.module';
       InitModule,
       ClassesModule,
       SpellsModule,
+      SrdModule,
+      SourcesModule,
   ],
 })
 export class AppModule {}

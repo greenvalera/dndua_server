@@ -3,6 +3,16 @@ interface CreateClassAttrs {
   pageId: string
 }
 
-export {
-  CreateClassAttrs
+interface CreateSubclassAttrs {
+  id: string
+  nameOrigin: string
+  nameTranslated: string
+  description: string
+  source: string
 }
+
+export {
+  CreateClassAttrs,
+  CreateSubclassAttrs,
+}
+
