@@ -3,16 +3,20 @@ interface CreateClassAttrs {
   pageId: string
 }
 
-interface CreateSubclassAttrs {
-  id: string
+interface SubclassDto {
   nameOrigin: string
   nameTranslated: string
   description: string
   source: string
 }
 
+type CreateSubclassAttrs = SubclassDto & {
+  id: string
+}
+
 export {
   CreateClassAttrs,
   CreateSubclassAttrs,
+  SubclassDto,
 }
 

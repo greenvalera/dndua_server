@@ -26,6 +26,7 @@ import { SourcesModule } from './sources/sources.module';
       GraphQLModule.forRoot<ApolloDriverConfig>({
         driver: ApolloDriver,
         autoSchemaFile: path.join(process.cwd(), 'src/schema.gql'),
+        path: '/api/graphql',
       }),
       ServeStaticModule.forRoot({
         rootPath: path.resolve(__dirname, 'static'),

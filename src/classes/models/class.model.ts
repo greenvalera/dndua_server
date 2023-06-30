@@ -15,8 +15,20 @@ export class Class extends Model<Class, CreateClassAttrs> {
   id: string
 
   @Field(() => String)
+  @Column({type: DataType.STRING, unique: true})
+  nameTranslated: string
+
+  @Field(() => String)
   @Column({type: DataType.TEXT})
   description: string
+
+  @Field(() => String)
+  @Column({type: DataType.STRING})
+  subclassesTitleOriginal: string;
+
+  @Field(() => String)
+  @Column({type: DataType.STRING, allowNull: true})
+  subclassesTitleTranslated: string;
 
   @Field(() => Subclass)
   @HasMany(() => Subclass)

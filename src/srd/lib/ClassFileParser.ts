@@ -30,10 +30,16 @@ export default class ClassFileParser {
       this.currentLine = this.lines.shift();
 
       // Parsing of origin and translated names
-      const nameMatches = this.currentLine.match(/^#\s(\S+)\s\((\w+)\)/);
+      const nameMatches = this.currentLine.match(/^#\s(\S+)\s\((\w+)\)/)
+      const nameMatchesNotTranslated =  this.currentLine.match(/^#\s(\S+)/)
       if (nameMatches) {
         this.classObject.name = nameMatches[1];
         this.classObject.id = nameMatches[2];
+        this.lines.shift();
+        break;
+      } else if (nameMatchesNotTranslated) {
+        this.classObject.name = null;
+        this.classObject.id = nameMatchesNotTranslated[1];
         this.lines.shift();
         break;
       }
@@ -45,12 +51,18 @@ export default class ClassFileParser {
     while (this.lines.length) {
       this.currentLine = this.lines.shift();
       const subclassesTitleMatch = this.currentLine.match(/^##\s(.+)\((.+)\)/);
+      const subclassesTitleMatchNotTranslated = this.currentLine.match(/^##\s(.+)/);
       if (subclassesTitleMatch) {
         this.classObject.subclassesTitleTranslated = subclassesTitleMatch[1];
         this.classObject.subclassesTitleOriginal = subclassesTitleMatch[2];
         this.lines.shift();
         break;
-      } else  {
+      } else if (subclassesTitleMatchNotTranslated) {
+        this.classObject.subclassesTitleTranslated = null;
+        this.classObject.subclassesTitleOriginal = subclassesTitleMatchNotTranslated[1];
+        this.lines.shift();
+        break;
+      } else {
         descriptionLines.push(this.currentLine);
       }
     }
@@ -65,6 +77,7 @@ export default class ClassFileParser {
     while (this.lines.length) {
       this.currentLine = this.lines.shift();
       const subclassNameMatch = this.currentLine.match(/^###\s(.+)\((.+)\)/);
+      const subclassNameMatchNotTranslated = this.currentLine.match(/^###\s(.+)/);
       if (subclassNameMatch) {
         if (subclass) {
           subclass.description = subclassLines.join('\n');
@@ -75,6 +88,24 @@ export default class ClassFileParser {
         subclassLines = [];
         subclass.nameOriginal = subclassNameMatch[2];
         subclass.nameTranslated = subclassNameMatch[1];
+        this.currentLine = this.lines.shift();
+        const sourceMatch = this.currentLine.match(/^Джерело:\s(.+)/);
+        if (sourceMatch) {
+          subclass.source = sourceMatch[1];
+          this.lines.shift();
+        }
+      } else if (subclassNameMatchNotTranslated) {
+        if (subclass) {
+          console.log(subclass);
+          console.log('store');
+          subclass.description = subclassLines.join('\n');
+          this.classObject.subclasses.push(subclass);
+        }
+
+        subclass = new Subclass();
+        subclassLines = [];
+        subclass.nameOriginal = subclassNameMatchNotTranslated[1];
+        subclass.nameTranslated = null;
         this.currentLine = this.lines.shift();
         const sourceMatch = this.currentLine.match(/^Джерело:\s(.+)/);
         if (sourceMatch) {
